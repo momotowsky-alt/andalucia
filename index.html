@@ -24,208 +24,270 @@ details{border-top:1px solid var(--line);margin-top:12px;padding-top:12px}summar
 .tabbar{position:fixed;left:50%;bottom:calc(10px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(calc(100% - 28px),690px);height:58px;background:#f9f9f9e8;border:1px solid #fff9;border-radius:20px;box-shadow:0 8px 30px #0002;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);display:flex;z-index:20}
 .tabbar a{flex:1;text-decoration:none;color:var(--sub);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:10px;gap:2px}.tabbar b{font-size:19px;color:var(--blue)}
 .note{background:#fff;border-radius:20px;padding:15px;font-size:13px;line-height:1.5;color:var(--sub)}
+
+/* App navigation */
+body{overflow-x:hidden}
+#home,.dayPanel,#stays,#info{display:none}
+#home.active,.dayPanel.active,#stays.active,#info.active{display:block}
+.dayPanel{min-height:100dvh}
+.metaPills{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.metaPill{background:#e9e9ee;border-radius:999px;padding:6px 9px;font-size:12px;color:#3a3a3c;font-weight:600}
+.tabbar a.active{color:var(--blue)}
+.tabbar a.active b{color:var(--blue)}
+.tabbar a:not(.active) b{color:var(--sub)}
+.baseList{background:#fff;border-radius:20px;overflow:hidden}
+.baseRow{display:flex;align-items:center;justify-content:space-between;padding:15px 16px;border-bottom:.5px solid var(--line)}
+.baseRow:last-child{border-bottom:0}.baseRow b{font-size:15px}.baseRow span{font-size:12px;color:var(--sub)}
+.infoCard{background:#fff;border-radius:20px;padding:16px;margin-bottom:12px}
+.infoCard h3{font-size:16px;margin:0 0 7px}.infoCard p{font-size:13px;line-height:1.5;color:var(--sub);margin:0}
+
 </style></head><body>
-<main id="home" class="shell">
+<main id="home" class="shell active">
 <header class="hero"><div class="label">29 listopada – 13 grudnia 2026</div><h1>Andaluzja</h1><p>Twój plan podróży</p></header>
 <div class="summary"><div class="metric"><b>15</b><span>dni</span></div><div class="metric"><b>6</b><span>baz</span></div><div class="metric"><b>🇪🇸</b><span>road trip</span></div></div>
-<div class="sectionTitle">Plan</div><div class="list"><a class="tripRow" href="#d1">
+<div class="sectionTitle">Plan</div><div class="list"><a class="tripRow" href="#d1" data-view="d1">
       <div class="dateBox"><b>29.11</b><span></span></div>
-      <div class="rowMain"><strong>SEVILLA — PRZYLOT</strong><small>⏰ 18:00 przylot🛏️ Sevilla 1/3</small></div><div class="chev">›</div>
-    </a><a class="tripRow" href="#d2">
+      <div class="rowMain"><strong>SEVILLA — PRZYLOT</strong><small>⏰ 18:00 przylot · 🛏️ Sevilla 1/3</small></div><div class="chev">›</div>
+    </a><a class="tripRow" href="#d2" data-view="d2">
       <div class="dateBox"><b>30.11</b><span></span></div>
-      <div class="rowMain"><strong>SEVILLA</strong><small>⏰ 10:00🛏️ Sevilla 2/3</small></div><div class="chev">›</div>
-    </a><a class="tripRow" href="#d3">
+      <div class="rowMain"><strong>SEVILLA</strong><small>⏰ 10:00 · 🛏️ Sevilla 2/3</small></div><div class="chev">›</div>
+    </a><a class="tripRow" href="#d3" data-view="d3">
       <div class="dateBox"><b>01.12</b><span></span></div>
-      <div class="rowMain"><strong>EL ROCÍO • JEREZ • CÁDIZ</strong><small>⏰ 09:00🛏️ Sevilla 3/3</small></div><div class="chev">›</div>
-    </a><a class="tripRow" href="#d4">
+      <div class="rowMain"><strong>EL ROCÍO • JEREZ • CÁDIZ</strong><small>⏰ 09:00 · 🛏️ Sevilla 3/3</small></div><div class="chev">›</div>
+    </a><a class="tripRow" href="#d4" data-view="d4">
       <div class="dateBox"><b>02.12</b><span></span></div>
-      <div class="rowMain"><strong>VEJER • BOLONIA • TARIFA → MARBELLA</strong><small>⏰ 08:30🛏️ Marbella 1/3</small></div><div class="chev">›</div>
-    </a><a class="tripRow" href="#d5">
+      <div class="rowMain"><strong>VEJER • BOLONIA • TARIFA → MARBELLA</strong><small>⏰ 08:30 · 🛏️ Marbella 1/3</small></div><div class="chev">›</div>
+    </a><a class="tripRow" href="#d5" data-view="d5">
       <div class="dateBox"><b>03.12</b><span></span></div>
-      <div class="rowMain"><strong>GIBRALTAR • ESTEPONA</strong><small>⏰ 09:30🛏️ Marbella 2/3</small></div><div class="chev">›</div>
-    </a><a class="tripRow" href="#d6">
+      <div class="rowMain"><strong>GIBRALTAR • ESTEPONA</strong><small>⏰ 09:30 · 🛏️ Marbella 2/3</small></div><div class="chev">›</div>
+    </a><a class="tripRow" href="#d6" data-view="d6">
       <div class="dateBox"><b>04.12</b><span></span></div>
-      <div class="rowMain"><strong>RONDA • SETENIL DE LAS BODEGAS</strong><small>⏰ 09:30🛏️ Marbella 3/3</small></div><div class="chev">›</div>
-    </a><a class="tripRow" href="#d7">
+      <div class="rowMain"><strong>RONDA • SETENIL DE LAS BODEGAS</strong><small>⏰ 09:30 · 🛏️ Marbella 3/3</small></div><div class="chev">›</div>
+    </a><a class="tripRow" href="#d7" data-view="d7">
       <div class="dateBox"><b>05.12</b><span></span></div>
-      <div class="rowMain"><strong>GARGANTA VERDE • ZAHARA • EL TORCAL → MÁLAGA</strong><small>⏰ 07:00🛏️ Málaga 1/2</small></div><div class="chev">›</div>
-    </a><a class="tripRow" href="#d8">
+      <div class="rowMain"><strong>GARGANTA VERDE • ZAHARA • EL TORCAL → MÁLAGA</strong><small>⏰ 07:00 · 🛏️ Málaga 1/2</small></div><div class="chev">›</div>
+    </a><a class="tripRow" href="#d8" data-view="d8">
       <div class="dateBox"><b>06.12</b><span></span></div>
-      <div class="rowMain"><strong>CAMINITO DEL REY</strong><small>⏰ wg biletu🛏️ Málaga 2/2</small></div><div class="chev">›</div>
-    </a><a class="tripRow" href="#d9">
+      <div class="rowMain"><strong>CAMINITO DEL REY</strong><small>⏰ wg biletu · 🛏️ Málaga 2/2</small></div><div class="chev">›</div>
+    </a><a class="tripRow" href="#d9" data-view="d9">
       <div class="dateBox"><b>07.12</b><span></span></div>
-      <div class="rowMain"><strong>NERJA • FRIGILIANA • CHÍLLAR → GRANADA</strong><small>⏰ 09:00🛏️ Granada 1/2</small></div><div class="chev">›</div>
-    </a><a class="tripRow" href="#d10">
+      <div class="rowMain"><strong>NERJA • FRIGILIANA • CHÍLLAR → GRANADA</strong><small>⏰ 09:00 · 🛏️ Granada 1/2</small></div><div class="chev">›</div>
+    </a><a class="tripRow" href="#d10" data-view="d10">
       <div class="dateBox"><b>08.12</b><span></span></div>
-      <div class="rowMain"><strong>LOS CAHORROS • ALHAMBRA</strong><small>⏰ 09:00🛏️ Granada 2/2</small></div><div class="chev">›</div>
-    </a><a class="tripRow" href="#d11">
+      <div class="rowMain"><strong>LOS CAHORROS • ALHAMBRA</strong><small>⏰ 09:00 · 🛏️ Granada 2/2</small></div><div class="chev">›</div>
+    </a><a class="tripRow" href="#d11" data-view="d11">
       <div class="dateBox"><b>09.12</b><span></span></div>
-      <div class="rowMain"><strong>GUADIX • BADLANDS • GORAFE → ALMERÍA</strong><small>⏰ 09:00🛏️ Almería 1/3</small></div><div class="chev">›</div>
-    </a><a class="tripRow" href="#d12">
+      <div class="rowMain"><strong>GUADIX • BADLANDS • GORAFE → ALMERÍA</strong><small>⏰ 09:00 · 🛏️ Almería 1/3</small></div><div class="chev">›</div>
+    </a><a class="tripRow" href="#d12" data-view="d12">
       <div class="dateBox"><b>10.12</b><span></span></div>
-      <div class="rowMain"><strong>CABO DE GATA</strong><small>⏰ 10:00🛏️ Almería 2/3</small></div><div class="chev">›</div>
-    </a><a class="tripRow" href="#d13">
+      <div class="rowMain"><strong>CABO DE GATA</strong><small>⏰ 10:00 · 🛏️ Almería 2/3</small></div><div class="chev">›</div>
+    </a><a class="tripRow" href="#d13" data-view="d13">
       <div class="dateBox"><b>11.12</b><span></span></div>
-      <div class="rowMain"><strong>DZIEŃ BUFOROWY — ALMERÍA</strong><small>⏰ bez budzika🛏️ Almería 3/3</small></div><div class="chev">›</div>
-    </a><a class="tripRow" href="#d14">
+      <div class="rowMain"><strong>DZIEŃ BUFOROWY — ALMERÍA</strong><small>⏰ bez budzika · 🛏️ Almería 3/3</small></div><div class="chev">›</div>
+    </a><a class="tripRow" href="#d14" data-view="d14">
       <div class="dateBox"><b>12.12</b><span></span></div>
-      <div class="rowMain"><strong>JAÉN • BAEZA • OLIWA → CÓRDOBA</strong><small>⏰ 09:00🛏️ Córdoba 1/1</small></div><div class="chev">›</div>
-    </a><a class="tripRow" href="#d15">
+      <div class="rowMain"><strong>JAÉN • BAEZA • OLIWA → CÓRDOBA</strong><small>⏰ 09:00 · 🛏️ Córdoba 1/1</small></div><div class="chev">›</div>
+    </a><a class="tripRow" href="#d15" data-view="d15">
       <div class="dateBox"><b>13.12</b><span></span></div>
-      <div class="rowMain"><strong>CÓRDOBA → SEVILLA AIRPORT</strong><small>⏰ 12:00🛏️ —</small></div><div class="chev">›</div>
+      <div class="rowMain"><strong>CÓRDOBA → SEVILLA AIRPORT</strong><small>⏰ 12:00 · 🛏️ —</small></div><div class="chev">›</div>
     </a></div>
 <div class="sectionTitle">Przed wyjazdem</div><div class="note">Noclegi uzupełnimy po rezerwacji. Trasy i restauracje zostają dostępne bezpośrednio z każdego dnia.</div>
 </main>
 <section class="dayPanel" id="d1">
-      <div class="navline"><a href="#home">‹ Plan</a><span>Dzień 1</span></div>
-      <div class="dayHead"><div class="eyebrow">29.11</div><h2>SEVILLA — PRZYLOT</h2><p>⏰ 18:00 przylot🛏️ Sevilla 1/3</p></div>
+      <div class="navline"><a href="#home" data-view="home">‹ Plan</a><span>Dzień 1</span></div>
+      <div class="dayHead"><div class="eyebrow">29.11</div><h2>SEVILLA — PRZYLOT</h2><p>⏰ 18:00 przylot · 🛏️ Sevilla 1/3</p></div>
       <div class="group">
         <div class="groupTitle"><span class="ico">↗</span><b>Trasa</b></div>
         <p>Seville Airport → Sevilla</p><a class="primary" href="https://www.google.com/maps/dir/?api=1&origin=Seville%20Airport%2C%20Sevilla%2C%20Spain&destination=Sevilla%2C%20Spain&travelmode=driving">Otwórz w Google Maps</a>
       </div>
       <div class="group"><div class="groupTitle"><span class="ico">⌂</span><b>Nocleg</b></div><p>🏨 Nocleg: <strong>do uzupełnienia po rezerwacji</strong></p></div>
       <div class="group food"><div class="groupTitle"><span class="ico">⌁</span><b>Jedzenie</b></div><details><summary>🍴 GDZIE ZJEŚĆ <span>(3)</span></summary><a class="rest" href="https://www.google.com/maps/search/?api=1&query=El%20Pasaje%20Tapas%2C%20Sevilla%2C%20Spain">🍴 <span>El Pasaje Tapas</span><small>Sevilla · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=El%20Traga%2C%20Sevilla%2C%20Spain">🍴 <span>El Traga</span><small>Sevilla · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=La%20Cochera%20del%20Abuelo%2C%20Sevilla%2C%20Spain">🍴 <span>La Cochera del Abuelo</span><small>Sevilla · pokaż w Google Maps</small></a></details></div>
-      <a class="backHome" href="#home">Wróć do planu</a>
+      <a class="backHome" href="#home" data-view="home">Wróć do planu</a>
     </section><section class="dayPanel" id="d2">
-      <div class="navline"><a href="#home">‹ Plan</a><span>Dzień 2</span></div>
-      <div class="dayHead"><div class="eyebrow">30.11</div><h2>SEVILLA</h2><p>⏰ 10:00🛏️ Sevilla 2/3</p></div>
+      <div class="navline"><a href="#home" data-view="home">‹ Plan</a><span>Dzień 2</span></div>
+      <div class="dayHead"><div class="eyebrow">30.11</div><h2>SEVILLA</h2><p>⏰ 10:00 · 🛏️ Sevilla 2/3</p></div>
       <div class="group">
         <div class="groupTitle"><span class="ico">↗</span><b>Trasa</b></div>
         <p>Real Alcázar de Sevilla → Catedral de Sevilla → Plaza de España → Triana</p><a class="primary" href="https://www.google.com/maps/dir/?api=1&origin=Real%20Alc%C3%A1zar%20de%20Sevilla%2C%20Spain&destination=Triana%2C%20Sevilla%2C%20Spain&travelmode=driving&waypoints=Catedral%20de%20Sevilla%2C%20Spain|Plaza%20de%20Espa%C3%B1a%2C%20Sevilla%2C%20Spain">Otwórz w Google Maps</a>
       </div>
       <div class="group"><div class="groupTitle"><span class="ico">⌂</span><b>Nocleg</b></div><p>🏨 Nocleg: <strong>do uzupełnienia po rezerwacji</strong></p></div>
       <div class="group food"><div class="groupTitle"><span class="ico">⌁</span><b>Jedzenie</b></div><details><summary>🍴 GDZIE ZJEŚĆ <span>(3)</span></summary><a class="rest" href="https://www.google.com/maps/search/?api=1&query=El%20Librero%20Tapas%20y%20Quesos%2C%20Sevilla%2C%20Spain">🍴 <span>El Librero Tapas y Quesos</span><small>Sevilla · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Alc%C3%A1zar%20Andalus%C3%AD%20Tapas%2C%20Sevilla%2C%20Spain">🍴 <span>Alcázar Andalusí Tapas</span><small>Sevilla · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=LaSanta%20cocina%20tradicional%2C%20Sevilla%2C%20Spain">🍴 <span>LaSanta cocina tradicional</span><small>Sevilla · pokaż w Google Maps</small></a></details></div>
-      <a class="backHome" href="#home">Wróć do planu</a>
+      <a class="backHome" href="#home" data-view="home">Wróć do planu</a>
     </section><section class="dayPanel" id="d3">
-      <div class="navline"><a href="#home">‹ Plan</a><span>Dzień 3</span></div>
-      <div class="dayHead"><div class="eyebrow">01.12</div><h2>EL ROCÍO • JEREZ • CÁDIZ</h2><p>⏰ 09:00🛏️ Sevilla 3/3</p></div>
+      <div class="navline"><a href="#home" data-view="home">‹ Plan</a><span>Dzień 3</span></div>
+      <div class="dayHead"><div class="eyebrow">01.12</div><h2>EL ROCÍO • JEREZ • CÁDIZ</h2><p>⏰ 09:00 · 🛏️ Sevilla 3/3</p></div>
       <div class="group">
         <div class="groupTitle"><span class="ico">↗</span><b>Trasa</b></div>
         <p>Sevilla → El Rocío → Jerez de la Frontera → Cádiz → Sevilla</p><a class="primary" href="https://www.google.com/maps/dir/?api=1&origin=Sevilla%2C%20Spain&destination=Sevilla%2C%20Spain&travelmode=driving&waypoints=El%20Roc%C3%ADo%2C%20Huelva%2C%20Spain|Jerez%20de%20la%20Frontera%2C%20C%C3%A1diz%2C%20Spain|C%C3%A1diz%2C%20Spain">Otwórz w Google Maps</a>
       </div>
       <div class="group"><div class="groupTitle"><span class="ico">⌂</span><b>Nocleg</b></div><p>🏨 Nocleg: <strong>do uzupełnienia po rezerwacji</strong></p></div>
       <div class="group food"><div class="groupTitle"><span class="ico">⌁</span><b>Jedzenie</b></div><details><summary>🍴 GDZIE ZJEŚĆ <span>(3)</span></summary><a class="rest" href="https://www.google.com/maps/search/?api=1&query=El%20Faro%20de%20C%C3%A1diz%2C%20C%C3%A1diz%2C%20Spain">🍴 <span>El Faro de Cádiz</span><small>Cádiz · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Freidur%C3%ADa%20Marisquer%C3%ADa%20Las%20Flores%201%2C%20C%C3%A1diz%2C%20Spain">🍴 <span>Freiduría Marisquería Las Flores 1</span><small>Cádiz · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Mariscos%20Camilo%2C%20C%C3%A1diz%2C%20Spain">🍴 <span>Mariscos Camilo</span><small>Cádiz · pokaż w Google Maps</small></a></details></div>
-      <a class="backHome" href="#home">Wróć do planu</a>
+      <a class="backHome" href="#home" data-view="home">Wróć do planu</a>
     </section><section class="dayPanel" id="d4">
-      <div class="navline"><a href="#home">‹ Plan</a><span>Dzień 4</span></div>
-      <div class="dayHead"><div class="eyebrow">02.12</div><h2>VEJER • BOLONIA • TARIFA → MARBELLA</h2><p>⏰ 08:30🛏️ Marbella 1/3</p></div>
+      <div class="navline"><a href="#home" data-view="home">‹ Plan</a><span>Dzień 4</span></div>
+      <div class="dayHead"><div class="eyebrow">02.12</div><h2>VEJER • BOLONIA • TARIFA → MARBELLA</h2><p>⏰ 08:30 · 🛏️ Marbella 1/3</p></div>
       <div class="group">
         <div class="groupTitle"><span class="ico">↗</span><b>Trasa</b></div>
         <p>Sevilla → Vejer de la Frontera → Playa de Bolonia → Baelo Claudia → Tarifa → Marbella</p><a class="primary" href="https://www.google.com/maps/dir/?api=1&origin=Sevilla%2C%20Spain&destination=Marbella%2C%20M%C3%A1laga%2C%20Spain&travelmode=driving&waypoints=Vejer%20de%20la%20Frontera%2C%20C%C3%A1diz%2C%20Spain|Playa%20de%20Bolonia%2C%20C%C3%A1diz%2C%20Spain|Baelo%20Claudia%2C%20C%C3%A1diz%2C%20Spain|Tarifa%2C%20C%C3%A1diz%2C%20Spain">Otwórz w Google Maps</a>
       </div>
       <div class="group"><div class="groupTitle"><span class="ico">⌂</span><b>Nocleg</b></div><p>🏨 Nocleg: <strong>do uzupełnienia po rezerwacji</strong></p></div>
       <div class="group food"><div class="groupTitle"><span class="ico">⌁</span><b>Jedzenie</b></div><details><summary>🍴 GDZIE ZJEŚĆ <span>(3)</span></summary><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Bar%20El%20Franc%C3%A9s%2C%20Tarifa%2C%20Spain">🍴 <span>Bar El Francés</span><small>Tarifa · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Garum%2C%20Marbella%2C%20Spain">🍴 <span>Garum</span><small>Marbella · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Taberna%20La%20Ni%C3%B1a%20del%20Pisto%2C%20Marbella%2C%20Spain">🍴 <span>Taberna La Niña del Pisto</span><small>Marbella · pokaż w Google Maps</small></a></details></div>
-      <a class="backHome" href="#home">Wróć do planu</a>
+      <a class="backHome" href="#home" data-view="home">Wróć do planu</a>
     </section><section class="dayPanel" id="d5">
-      <div class="navline"><a href="#home">‹ Plan</a><span>Dzień 5</span></div>
-      <div class="dayHead"><div class="eyebrow">03.12</div><h2>GIBRALTAR • ESTEPONA</h2><p>⏰ 09:30🛏️ Marbella 2/3</p></div>
+      <div class="navline"><a href="#home" data-view="home">‹ Plan</a><span>Dzień 5</span></div>
+      <div class="dayHead"><div class="eyebrow">03.12</div><h2>GIBRALTAR • ESTEPONA</h2><p>⏰ 09:30 · 🛏️ Marbella 2/3</p></div>
       <div class="group">
         <div class="groupTitle"><span class="ico">↗</span><b>Trasa</b></div>
         <p>Marbella → Gibraltar → Playa del Guadalquitón → Estepona → Marbella</p><a class="primary" href="https://www.google.com/maps/dir/?api=1&origin=Marbella%2C%20M%C3%A1laga%2C%20Spain&destination=Marbella%2C%20M%C3%A1laga%2C%20Spain&travelmode=driving&waypoints=Gibraltar|Playa%20del%20Guadalquit%C3%B3n%2C%20Spain|Estepona%2C%20M%C3%A1laga%2C%20Spain">Otwórz w Google Maps</a>
       </div>
       <div class="group"><div class="groupTitle"><span class="ico">⌂</span><b>Nocleg</b></div><p>🏨 Nocleg: <strong>do uzupełnienia po rezerwacji</strong></p></div>
       <div class="group food"><div class="groupTitle"><span class="ico">⌁</span><b>Jedzenie</b></div><details><summary>🍴 GDZIE ZJEŚĆ <span>(3)</span></summary><a class="rest" href="https://www.google.com/maps/search/?api=1&query=La%20Escollera%2C%20Estepona%2C%20Spain">🍴 <span>La Escollera</span><small>Estepona · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Candela%2C%20Marbella%2C%20Spain">🍴 <span>Candela</span><small>Marbella · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Paladar%20Taberna%2C%20Marbella%2C%20Spain">🍴 <span>Paladar Taberna</span><small>Marbella · pokaż w Google Maps</small></a></details></div>
-      <a class="backHome" href="#home">Wróć do planu</a>
+      <a class="backHome" href="#home" data-view="home">Wróć do planu</a>
     </section><section class="dayPanel" id="d6">
-      <div class="navline"><a href="#home">‹ Plan</a><span>Dzień 6</span></div>
-      <div class="dayHead"><div class="eyebrow">04.12</div><h2>RONDA • SETENIL DE LAS BODEGAS</h2><p>⏰ 09:30🛏️ Marbella 3/3</p></div>
+      <div class="navline"><a href="#home" data-view="home">‹ Plan</a><span>Dzień 6</span></div>
+      <div class="dayHead"><div class="eyebrow">04.12</div><h2>RONDA • SETENIL DE LAS BODEGAS</h2><p>⏰ 09:30 · 🛏️ Marbella 3/3</p></div>
       <div class="group">
         <div class="groupTitle"><span class="ico">↗</span><b>Trasa</b></div>
         <p>Marbella → Ronda → Setenil de las Bodegas → Marbella</p><a class="primary" href="https://www.google.com/maps/dir/?api=1&origin=Marbella%2C%20Spain&destination=Marbella%2C%20Spain&travelmode=driving&waypoints=Ronda%2C%20Spain|Setenil%20de%20las%20Bodegas%2C%20Spain">Otwórz w Google Maps</a>
       </div>
       <div class="group"><div class="groupTitle"><span class="ico">⌂</span><b>Nocleg</b></div><p>🏨 Nocleg: <strong>do uzupełnienia po rezerwacji</strong></p></div>
       <div class="group food"><div class="groupTitle"><span class="ico">⌁</span><b>Jedzenie</b></div><details><summary>🍴 GDZIE ZJEŚĆ <span>(3)</span></summary><a class="rest" href="https://www.google.com/maps/search/?api=1&query=El%20Lechuguita%2C%20Ronda%2C%20Spain">🍴 <span>El Lechuguita</span><small>Ronda · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Restaurante%20Las%20Tablas%2C%20Ronda%2C%20Spain">🍴 <span>Restaurante Las Tablas</span><small>Ronda · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Restaurante%20Casa%20Mar%C3%ADa%2C%20Ronda%2C%20Spain">🍴 <span>Restaurante Casa María</span><small>Ronda · pokaż w Google Maps</small></a></details></div>
-      <a class="backHome" href="#home">Wróć do planu</a>
+      <a class="backHome" href="#home" data-view="home">Wróć do planu</a>
     </section><section class="dayPanel" id="d7">
-      <div class="navline"><a href="#home">‹ Plan</a><span>Dzień 7</span></div>
-      <div class="dayHead"><div class="eyebrow">05.12</div><h2>GARGANTA VERDE • ZAHARA • EL TORCAL → MÁLAGA</h2><p>⏰ 07:00🛏️ Málaga 1/2</p></div>
+      <div class="navline"><a href="#home" data-view="home">‹ Plan</a><span>Dzień 7</span></div>
+      <div class="dayHead"><div class="eyebrow">05.12</div><h2>GARGANTA VERDE • ZAHARA • EL TORCAL → MÁLAGA</h2><p>⏰ 07:00 · 🛏️ Málaga 1/2</p></div>
       <div class="group">
         <div class="groupTitle"><span class="ico">↗</span><b>Trasa</b></div>
         <p>Marbella → Sendero La Garganta Verde → Zahara de la Sierra → El Torcal de Antequera → Málaga</p><a class="primary" href="https://www.google.com/maps/dir/?api=1&origin=Marbella%2C%20M%C3%A1laga%2C%20Spain&destination=M%C3%A1laga%2C%20Spain&travelmode=driving&waypoints=Sendero%20La%20Garganta%20Verde%2C%20Zahara%20de%20la%20Sierra%2C%20C%C3%A1diz%2C%20Spain|Zahara%20de%20la%20Sierra%2C%20C%C3%A1diz%2C%20Spain|El%20Torcal%20de%20Antequera%2C%20M%C3%A1laga%2C%20Spain">Otwórz w Google Maps</a>
       </div>
       <div class="group"><div class="groupTitle"><span class="ico">⌂</span><b>Nocleg</b></div><p>🏨 Nocleg: <strong>do uzupełnienia po rezerwacji</strong></p></div>
       <div class="group food"><div class="groupTitle"><span class="ico">⌁</span><b>Jedzenie</b></div><details><summary>🍴 GDZIE ZJEŚĆ <span>(3)</span></summary><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Al%20Lago%2C%20Zahara%20de%20la%20Sierra%2C%20Spain">🍴 <span>Al Lago</span><small>Zahara de la Sierra · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=El%20Pimpi%2C%20M%C3%A1laga%2C%20Spain">🍴 <span>El Pimpi</span><small>Málaga · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Uvedoble%20Taberna%2C%20M%C3%A1laga%2C%20Spain">🍴 <span>Uvedoble Taberna</span><small>Málaga · pokaż w Google Maps</small></a></details></div>
-      <a class="backHome" href="#home">Wróć do planu</a>
+      <a class="backHome" href="#home" data-view="home">Wróć do planu</a>
     </section><section class="dayPanel" id="d8">
-      <div class="navline"><a href="#home">‹ Plan</a><span>Dzień 8</span></div>
-      <div class="dayHead"><div class="eyebrow">06.12</div><h2>CAMINITO DEL REY</h2><p>⏰ wg biletu🛏️ Málaga 2/2</p></div>
+      <div class="navline"><a href="#home" data-view="home">‹ Plan</a><span>Dzień 8</span></div>
+      <div class="dayHead"><div class="eyebrow">06.12</div><h2>CAMINITO DEL REY</h2><p>⏰ wg biletu · 🛏️ Málaga 2/2</p></div>
       <div class="group">
         <div class="groupTitle"><span class="ico">↗</span><b>Trasa</b></div>
         <p>Málaga → Restaurante El Kiosko → Málaga</p><a class="primary" href="https://www.google.com/maps/dir/?api=1&origin=M%C3%A1laga%2C%20Spain&destination=M%C3%A1laga%2C%20Spain&travelmode=driving&waypoints=Restaurante%20El%20Kiosko%2C%20Ardales%2C%20M%C3%A1laga%2C%20Spain">Otwórz w Google Maps</a>
       </div>
       <div class="group"><div class="groupTitle"><span class="ico">⌂</span><b>Nocleg</b></div><p>🏨 Nocleg: <strong>do uzupełnienia po rezerwacji</strong></p></div>
       <div class="group food"><div class="groupTitle"><span class="ico">⌁</span><b>Jedzenie</b></div><details><summary>🍴 GDZIE ZJEŚĆ <span>(3)</span></summary><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Restaurante%20El%20Kiosko%2C%20Ardales%2C%20Spain">🍴 <span>Restaurante El Kiosko</span><small>Ardales · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Casa%20Lola%2C%20M%C3%A1laga%2C%20Spain">🍴 <span>Casa Lola</span><small>Málaga · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=El%20Pimpi%2C%20M%C3%A1laga%2C%20Spain">🍴 <span>El Pimpi</span><small>Málaga · pokaż w Google Maps</small></a></details></div>
-      <a class="backHome" href="#home">Wróć do planu</a>
+      <a class="backHome" href="#home" data-view="home">Wróć do planu</a>
     </section><section class="dayPanel" id="d9">
-      <div class="navline"><a href="#home">‹ Plan</a><span>Dzień 9</span></div>
-      <div class="dayHead"><div class="eyebrow">07.12</div><h2>NERJA • FRIGILIANA • CHÍLLAR → GRANADA</h2><p>⏰ 09:00🛏️ Granada 1/2</p></div>
+      <div class="navline"><a href="#home" data-view="home">‹ Plan</a><span>Dzień 9</span></div>
+      <div class="dayHead"><div class="eyebrow">07.12</div><h2>NERJA • FRIGILIANA • CHÍLLAR → GRANADA</h2><p>⏰ 09:00 · 🛏️ Granada 1/2</p></div>
       <div class="group">
         <div class="groupTitle"><span class="ico">↗</span><b>Trasa</b></div>
         <p>Málaga → Cueva de Nerja → Frigiliana → Río Chíllar → Granada</p><a class="primary" href="https://www.google.com/maps/dir/?api=1&origin=M%C3%A1laga%2C%20Spain&destination=Granada%2C%20Spain&travelmode=driving&waypoints=Cueva%20de%20Nerja%2C%20M%C3%A1laga%2C%20Spain|Frigiliana%2C%20M%C3%A1laga%2C%20Spain|R%C3%ADo%20Ch%C3%ADllar%2C%20Nerja%2C%20M%C3%A1laga%2C%20Spain">Otwórz w Google Maps</a>
       </div>
       <div class="group"><div class="groupTitle"><span class="ico">⌂</span><b>Nocleg</b></div><p>🏨 Nocleg: <strong>do uzupełnienia po rezerwacji</strong></p></div>
       <div class="group food"><div class="groupTitle"><span class="ico">⌁</span><b>Jedzenie</b></div><details><summary>🍴 GDZIE ZJEŚĆ <span>(3)</span></summary><a class="rest" href="https://www.google.com/maps/search/?api=1&query=The%20Garden%20Restaurant%2C%20Frigiliana%2C%20Spain">🍴 <span>The Garden Restaurant</span><small>Frigiliana · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Bodegas%20Casta%C3%B1eda%2C%20Granada%2C%20Spain">🍴 <span>Bodegas Castañeda</span><small>Granada · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Los%20Diamantes%2C%20Granada%2C%20Spain">🍴 <span>Los Diamantes</span><small>Granada · pokaż w Google Maps</small></a></details></div>
-      <a class="backHome" href="#home">Wróć do planu</a>
+      <a class="backHome" href="#home" data-view="home">Wróć do planu</a>
     </section><section class="dayPanel" id="d10">
-      <div class="navline"><a href="#home">‹ Plan</a><span>Dzień 10</span></div>
-      <div class="dayHead"><div class="eyebrow">08.12</div><h2>LOS CAHORROS • ALHAMBRA</h2><p>⏰ 09:00🛏️ Granada 2/2</p></div>
+      <div class="navline"><a href="#home" data-view="home">‹ Plan</a><span>Dzień 10</span></div>
+      <div class="dayHead"><div class="eyebrow">08.12</div><h2>LOS CAHORROS • ALHAMBRA</h2><p>⏰ 09:00 · 🛏️ Granada 2/2</p></div>
       <div class="group">
         <div class="groupTitle"><span class="ico">↗</span><b>Trasa</b></div>
         <p>Granada → Los Cahorros → Alhambra → Mirador de San Nicolás</p><a class="primary" href="https://www.google.com/maps/dir/?api=1&origin=Granada%2C%20Spain&destination=Mirador%20de%20San%20Nicol%C3%A1s%2C%20Granada%2C%20Spain&travelmode=driving&waypoints=Los%20Cahorros%2C%20Monachil%2C%20Granada%2C%20Spain|Alhambra%2C%20Granada%2C%20Spain">Otwórz w Google Maps</a>
       </div>
       <div class="group"><div class="groupTitle"><span class="ico">⌂</span><b>Nocleg</b></div><p>🏨 Nocleg: <strong>do uzupełnienia po rezerwacji</strong></p></div>
       <div class="group food"><div class="groupTitle"><span class="ico">⌁</span><b>Jedzenie</b></div><details><summary>🍴 GDZIE ZJEŚĆ <span>(3)</span></summary><a class="rest" href="https://www.google.com/maps/search/?api=1&query=%C3%81vila%20Tapas%2C%20Granada%2C%20Spain">🍴 <span>Ávila Tapas</span><small>Granada · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Bodegas%20Casta%C3%B1eda%2C%20Granada%2C%20Spain">🍴 <span>Bodegas Castañeda</span><small>Granada · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=El%20Mercader%2C%20Granada%2C%20Spain">🍴 <span>El Mercader</span><small>Granada · pokaż w Google Maps</small></a></details></div>
-      <a class="backHome" href="#home">Wróć do planu</a>
+      <a class="backHome" href="#home" data-view="home">Wróć do planu</a>
     </section><section class="dayPanel" id="d11">
-      <div class="navline"><a href="#home">‹ Plan</a><span>Dzień 11</span></div>
-      <div class="dayHead"><div class="eyebrow">09.12</div><h2>GUADIX • BADLANDS • GORAFE → ALMERÍA</h2><p>⏰ 09:00🛏️ Almería 1/3</p></div>
+      <div class="navline"><a href="#home" data-view="home">‹ Plan</a><span>Dzień 11</span></div>
+      <div class="dayHead"><div class="eyebrow">09.12</div><h2>GUADIX • BADLANDS • GORAFE → ALMERÍA</h2><p>⏰ 09:00 · 🛏️ Almería 1/3</p></div>
       <div class="group">
         <div class="groupTitle"><span class="ico">↗</span><b>Trasa</b></div>
         <p>Granada → Guadix → Mirador Badlands de Purullena → Gorafe → Almería</p><a class="primary" href="https://www.google.com/maps/dir/?api=1&origin=Granada%2C%20Spain&destination=Almer%C3%ADa%2C%20Spain&travelmode=driving&waypoints=Guadix%2C%20Granada%2C%20Spain|Mirador%20Badlands%20de%20Purullena%2C%20Granada%2C%20Spain|Gorafe%2C%20Granada%2C%20Spain">Otwórz w Google Maps</a>
       </div>
       <div class="group"><div class="groupTitle"><span class="ico">⌂</span><b>Nocleg</b></div><p>🏨 Nocleg: <strong>do uzupełnienia po rezerwacji</strong></p></div>
       <div class="group food"><div class="groupTitle"><span class="ico">⌁</span><b>Jedzenie</b></div><details><summary>🍴 GDZIE ZJEŚĆ <span>(3)</span></summary><a class="rest" href="https://www.google.com/maps/search/?api=1&query=La%20Tinaja%2C%20Guadix%2C%20Spain">🍴 <span>La Tinaja</span><small>Guadix · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Casa%20Puga%2C%20Almer%C3%ADa%2C%20Spain">🍴 <span>Casa Puga</span><small>Almería · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Jovellanos%2016%2C%20Almer%C3%ADa%2C%20Spain">🍴 <span>Jovellanos 16</span><small>Almería · pokaż w Google Maps</small></a></details></div>
-      <a class="backHome" href="#home">Wróć do planu</a>
+      <a class="backHome" href="#home" data-view="home">Wróć do planu</a>
     </section><section class="dayPanel" id="d12">
-      <div class="navline"><a href="#home">‹ Plan</a><span>Dzień 12</span></div>
-      <div class="dayHead"><div class="eyebrow">10.12</div><h2>CABO DE GATA</h2><p>⏰ 10:00🛏️ Almería 2/3</p></div>
+      <div class="navline"><a href="#home" data-view="home">‹ Plan</a><span>Dzień 12</span></div>
+      <div class="dayHead"><div class="eyebrow">10.12</div><h2>CABO DE GATA</h2><p>⏰ 10:00 · 🛏️ Almería 2/3</p></div>
       <div class="group">
         <div class="groupTitle"><span class="ico">↗</span><b>Trasa</b></div>
         <p>Almería → San José → Playa de los Genoveses → Playa de Mónsul → Los Escullos → La Isleta del Moro → Rodalquilar → Las Negras → Almería</p><a class="primary" href="https://www.google.com/maps/dir/?api=1&origin=Almer%C3%ADa%2C%20Spain&destination=Almer%C3%ADa%2C%20Spain&travelmode=driving&waypoints=San%20Jos%C3%A9%2C%20Almer%C3%ADa%2C%20Spain|Playa%20de%20los%20Genoveses%2C%20Almer%C3%ADa%2C%20Spain|Playa%20de%20M%C3%B3nsul%2C%20Almer%C3%ADa%2C%20Spain|Los%20Escullos%2C%20Almer%C3%ADa%2C%20Spain|La%20Isleta%20del%20Moro%2C%20Almer%C3%ADa%2C%20Spain|Rodalquilar%2C%20Almer%C3%ADa%2C%20Spain|Las%20Negras%2C%20Almer%C3%ADa%2C%20Spain">Otwórz w Google Maps</a>
       </div>
       <div class="group"><div class="groupTitle"><span class="ico">⌂</span><b>Nocleg</b></div><p>🏨 Nocleg: <strong>do uzupełnienia po rezerwacji</strong></p></div>
       <div class="group food"><div class="groupTitle"><span class="ico">⌁</span><b>Jedzenie</b></div><details><summary>🍴 GDZIE ZJEŚĆ <span>(3)</span></summary><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Casa%20Sebasti%C3%A1n%2C%20San%20Jos%C3%A9%20Almer%C3%ADa%2C%20Spain">🍴 <span>Casa Sebastián</span><small>San José Almería · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=La%20Ola%2C%20La%20Isleta%20del%20Moro%2C%20Spain">🍴 <span>La Ola</span><small>La Isleta del Moro · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Casa%20Puga%2C%20Almer%C3%ADa%2C%20Spain">🍴 <span>Casa Puga</span><small>Almería · pokaż w Google Maps</small></a></details></div>
-      <a class="backHome" href="#home">Wróć do planu</a>
+      <a class="backHome" href="#home" data-view="home">Wróć do planu</a>
     </section><section class="dayPanel" id="d13">
-      <div class="navline"><a href="#home">‹ Plan</a><span>Dzień 13</span></div>
-      <div class="dayHead"><div class="eyebrow">11.12</div><h2>DZIEŃ BUFOROWY — ALMERÍA</h2><p>⏰ bez budzika🛏️ Almería 3/3</p></div>
+      <div class="navline"><a href="#home" data-view="home">‹ Plan</a><span>Dzień 13</span></div>
+      <div class="dayHead"><div class="eyebrow">11.12</div><h2>DZIEŃ BUFOROWY — ALMERÍA</h2><p>⏰ bez budzika · 🛏️ Almería 3/3</p></div>
       <div class="group">
         <div class="groupTitle"><span class="ico">↗</span><b>Trasa</b></div>
         <p>Almería → Desierto de Tabernas → Almería</p><a class="primary" href="https://www.google.com/maps/dir/?api=1&origin=Almer%C3%ADa%2C%20Spain&destination=Almer%C3%ADa%2C%20Spain&travelmode=driving&waypoints=Desierto%20de%20Tabernas%2C%20Almer%C3%ADa%2C%20Spain">Otwórz w Google Maps</a>
       </div>
       <div class="group"><div class="groupTitle"><span class="ico">⌂</span><b>Nocleg</b></div><p>🏨 Nocleg: <strong>do uzupełnienia po rezerwacji</strong></p></div>
       <div class="group food"><div class="groupTitle"><span class="ico">⌁</span><b>Jedzenie</b></div><details><summary>🍴 GDZIE ZJEŚĆ <span>(3)</span></summary><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Casa%20Puga%2C%20Almer%C3%ADa%2C%20Spain">🍴 <span>Casa Puga</span><small>Almería · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Jovellanos%2016%2C%20Almer%C3%ADa%2C%20Spain">🍴 <span>Jovellanos 16</span><small>Almería · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Taberna%20Nuestra%20Tierra%2C%20Almer%C3%ADa%2C%20Spain">🍴 <span>Taberna Nuestra Tierra</span><small>Almería · pokaż w Google Maps</small></a></details></div>
-      <a class="backHome" href="#home">Wróć do planu</a>
+      <a class="backHome" href="#home" data-view="home">Wróć do planu</a>
     </section><section class="dayPanel" id="d14">
-      <div class="navline"><a href="#home">‹ Plan</a><span>Dzień 14</span></div>
-      <div class="dayHead"><div class="eyebrow">12.12</div><h2>JAÉN • BAEZA • OLIWA → CÓRDOBA</h2><p>⏰ 09:00🛏️ Córdoba 1/1</p></div>
+      <div class="navline"><a href="#home" data-view="home">‹ Plan</a><span>Dzień 14</span></div>
+      <div class="dayHead"><div class="eyebrow">12.12</div><h2>JAÉN • BAEZA • OLIWA → CÓRDOBA</h2><p>⏰ 09:00 · 🛏️ Córdoba 1/1</p></div>
       <div class="group">
         <div class="groupTitle"><span class="ico">↗</span><b>Trasa</b></div>
         <p>Almería → Jaén → Baeza → Córdoba</p><a class="primary" href="https://www.google.com/maps/dir/?api=1&origin=Almer%C3%ADa%2C%20Spain&destination=C%C3%B3rdoba%2C%20Spain&travelmode=driving&waypoints=Ja%C3%A9n%2C%20Spain|Baeza%2C%20Spain">Otwórz w Google Maps</a>
       </div>
       <div class="group"><div class="groupTitle"><span class="ico">⌂</span><b>Nocleg</b></div><p>🏨 Nocleg: <strong>do uzupełnienia po rezerwacji</strong></p></div>
       <div class="group food"><div class="groupTitle"><span class="ico">⌁</span><b>Jedzenie</b></div><details><summary>🍴 GDZIE ZJEŚĆ <span>(3)</span></summary><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Taberna%20Salinas%2C%20C%C3%B3rdoba%2C%20Spain">🍴 <span>Taberna Salinas</span><small>Córdoba · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Casa%20Pepe%20de%20la%20Juder%C3%ADa%2C%20C%C3%B3rdoba%2C%20Spain">🍴 <span>Casa Pepe de la Judería</span><small>Córdoba · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Taberna%20La%20Montillana%2C%20C%C3%B3rdoba%2C%20Spain">🍴 <span>Taberna La Montillana</span><small>Córdoba · pokaż w Google Maps</small></a></details></div>
-      <a class="backHome" href="#home">Wróć do planu</a>
+      <a class="backHome" href="#home" data-view="home">Wróć do planu</a>
     </section><section class="dayPanel" id="d15">
-      <div class="navline"><a href="#home">‹ Plan</a><span>Dzień 15</span></div>
-      <div class="dayHead"><div class="eyebrow">13.12</div><h2>CÓRDOBA → SEVILLA AIRPORT</h2><p>⏰ 12:00🛏️ —</p></div>
+      <div class="navline"><a href="#home" data-view="home">‹ Plan</a><span>Dzień 15</span></div>
+      <div class="dayHead"><div class="eyebrow">13.12</div><h2>CÓRDOBA → SEVILLA AIRPORT</h2><p>⏰ 12:00 · 🛏️ —</p></div>
       <div class="group">
         <div class="groupTitle"><span class="ico">↗</span><b>Trasa</b></div>
         <p>Córdoba → Seville Airport</p><a class="primary" href="https://www.google.com/maps/dir/?api=1&origin=C%C3%B3rdoba%2C%20Spain&destination=Seville%20Airport%2C%20Sevilla%2C%20Spain&travelmode=driving">Otwórz w Google Maps</a>
       </div>
       <div class="group"><div class="groupTitle"><span class="ico">⌂</span><b>Nocleg</b></div><p>✈️ Powrót</p></div>
       <div class="group food"><div class="groupTitle"><span class="ico">⌁</span><b>Jedzenie</b></div><details><summary>🍴 GDZIE ZJEŚĆ <span>(2)</span></summary><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Taberna%20Salinas%2C%20C%C3%B3rdoba%2C%20Spain">🍴 <span>Taberna Salinas</span><small>Córdoba · pokaż w Google Maps</small></a><a class="rest" href="https://www.google.com/maps/search/?api=1&query=Casa%20Pepe%20de%20la%20Juder%C3%ADa%2C%20C%C3%B3rdoba%2C%20Spain">🍴 <span>Casa Pepe de la Judería</span><small>Córdoba · pokaż w Google Maps</small></a></details></div>
-      <a class="backHome" href="#home">Wróć do planu</a>
+      <a class="backHome" href="#home" data-view="home">Wróć do planu</a>
     </section>
-<nav class="tabbar"><a href="#home"><b>⌂</b>Plan</a><a href="#d1"><b>⌖</b>Dzisiaj</a><a href="#home"><b>•••</b>Więcej</a></nav>
+
+<section id="stays" class="shell">
+  <header class="hero"><div class="label">6 baz</div><h1>Noclegi</h1><p>Uzupełnimy konkretne miejsca po rezerwacji.</p></header>
+  <div class="baseList">
+    <div class="baseRow"><b>Sevilla</b><span>3 noce · do rezerwacji</span></div>
+    <div class="baseRow"><b>Marbella</b><span>3 noce · do rezerwacji</span></div>
+    <div class="baseRow"><b>Málaga</b><span>2 noce · do rezerwacji</span></div>
+    <div class="baseRow"><b>Granada</b><span>2 noce · do rezerwacji</span></div>
+    <div class="baseRow"><b>Almería</b><span>3 noce · do rezerwacji</span></div>
+    <div class="baseRow"><b>Córdoba</b><span>1 noc · do rezerwacji</span></div>
+  </div>
+</section>
+<section id="info" class="shell">
+  <header class="hero"><div class="label">Andaluzja 2026</div><h1>Info</h1><p>Najważniejsze rzeczy w jednym miejscu.</p></header>
+  <div class="infoCard"><h3>Termin</h3><p>29 listopada – 13 grudnia 2026 · 15 dni.</p></div>
+  <div class="infoCard"><h3>Trasy</h3><p>Każdy dzień ma własny przycisk otwierający gotową trasę w Google Maps.</p></div>
+  <div class="infoCard"><h3>Noclegi</h3><p>Na razie zapisane są bazy i liczba nocy. Konkretne hotele/apartamenty dodamy po rezerwacji.</p></div>
+</section>
+<nav class="tabbar">
+<a href="#home" data-view="home" class="active"><b>⌂</b>Plan</a>
+<a href="#stays" data-view="stays"><b>▣</b>Noclegi</a>
+<a href="#info" data-view="info"><b>ⓘ</b>Info</a>
+</nav>
+
+<script>
+(function(){
+  const screens = () => [...document.querySelectorAll('#home,.dayPanel,#stays,#info')];
+  function show(id, push=true){
+    if(!document.getElementById(id)) id='home';
+    screens().forEach(el=>el.classList.toggle('active',el.id===id));
+    document.querySelectorAll('.tabbar a').forEach(a=>{
+      a.classList.toggle('active', a.dataset.view===id || (id.startsWith('d') && a.dataset.view==='home'));
+    });
+    window.scrollTo(0,0);
+    if(push && location.hash !== '#'+id) history.pushState({view:id},'', '#'+id);
+  }
+  document.addEventListener('click', e=>{
+    const a=e.target.closest('[data-view]');
+    if(!a) return;
+    e.preventDefault();
+    show(a.dataset.view);
+  });
+  window.addEventListener('popstate',()=>show(location.hash.slice(1)||'home',false));
+  show(location.hash.slice(1)||'home',false);
+})();
+</script>
 </body></html>
