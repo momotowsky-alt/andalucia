@@ -133,10 +133,18 @@ body:not(.app-ready) .dayPanel:target{padding-top:calc(68px + env(safe-area-inse
 body:not(.app-ready) .dayPanel:target .navline{display:flex;position:fixed;top:0;left:0;right:0;z-index:60;height:calc(52px + env(safe-area-inset-top));padding:env(safe-area-inset-top) max(16px,calc((100vw - 688px)/2)) 0;background:rgba(242,242,247,.88);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);border-bottom:.5px solid rgba(60,60,67,.16);align-items:center;justify-content:flex-start}
 body:not(.app-ready) .dayPanel:target .navline a{font-size:17px;font-weight:500;letter-spacing:-.2px;min-height:44px;display:flex;align-items:center;padding-right:12px}
 body:not(.app-ready) .dayPanel:target .navline span{position:absolute;left:50%;transform:translateX(-50%);width:min(58vw,360px);font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
+/* Keep navigation text out of translucent/backdrop compositing on iOS. */
+.day-toolbar,body:not(.app-ready) .dayPanel:target .navline{
+ background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none;
+ filter:none;isolation:isolate;
+}
+.day-toolbar span,body:not(.app-ready) .dayPanel:target .navline span{
+ left:21%;right:21%;width:auto;transform:none;text-shadow:none;
+}
 /* The fixed top control replaces the duplicate bottom return link. */
 .dayPanel .backHome,.dayPanel .day-flow-note{display:none!important}
 @media(prefers-color-scheme:dark){
- .day-toolbar,body:not(.app-ready) .dayPanel:target .navline{background:rgba(28,28,32,.88);border-bottom-color:rgba(255,255,255,.12)}
+ .day-toolbar,body:not(.app-ready) .dayPanel:target .navline{background:var(--bg);border-bottom-color:rgba(255,255,255,.12)}
 }
 #trips,#new-trip{display:none}#trips.active,#new-trip.active{display:block}
 body.hub-open .tabbar{display:none}
