@@ -119,32 +119,43 @@ body:not(.app-ready) .dayPanel:target,body:not(.app-ready) #stays:target,body:no
 
 .tabbar a{font-size:12px;font-weight:550;gap:3px}.tabbar b{font-size:21px;height:24px}.tabbar svg{width:24px;height:24px;display:block}
 .navline{font-size:15px}.navline a{font-size:18px;min-height:44px;display:flex;align-items:center}
-/* Navigation inside a day: works both with JS and in iOS local-file preview. */
-.day-toolbar{display:none;position:fixed;top:0;left:0;right:0;z-index:60;height:calc(52px + env(safe-area-inset-top));padding:env(safe-area-inset-top) max(16px,calc((100vw - 688px)/2)) 0;background:rgba(242,242,247,.88);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);border-bottom:.5px solid rgba(60,60,67,.16)}
-.day-toolbar a{font-size:17px;font-weight:500;letter-spacing:-.2px;color:var(--blue);text-decoration:none;min-height:44px;display:flex;align-items:center;flex:0 0 auto;padding-right:12px}
-.day-toolbar span{position:absolute;left:50%;transform:translateX(-50%);width:min(58vw,360px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;font-size:14px;font-weight:600;letter-spacing:-.15px;color:var(--text)}
-/* Normal browser/app mode: global fixed iOS-style navigation bar. */
-body.app-ready.days-open .day-toolbar{display:flex;align-items:center;justify-content:flex-start}
-body.app-ready.days-open .dayPanel{padding-top:calc(68px + env(safe-area-inset-top))}
+/* Day navigation: a single opaque layer, shared by app and file preview. */
+.day-toolbar,body:not(.app-ready):has(.dayPanel:target) .dayPanel .navline{
+ position:fixed;inset:0 0 auto;z-index:500;
+ height:calc(56px + env(safe-area-inset-top,0px));
+ padding:env(safe-area-inset-top,0px) max(16px,calc((100vw - 688px)/2)) 0;
+ display:grid;grid-template-columns:68px minmax(0,1fr) 68px;gap:8px;align-items:center;
+ background:#f2f2f7;color:#111;border-bottom:1px solid #e5e5ea;
+ backdrop-filter:none;-webkit-backdrop-filter:none;filter:none;transform:none;
+ opacity:1;text-shadow:none;box-shadow:none;isolation:isolate;
+}
+.day-toolbar{display:none}
+body.app-ready.days-open .day-toolbar{display:grid}
+body.app-ready.days-open .dayPanel{padding-top:calc(72px + env(safe-area-inset-top,0px))}
 body.app-ready.days-open .dayPanel .navline{display:none}
-/* iOS Files / Quick Look fallback: JavaScript may not run, so make the
-   navline of the :target day itself fixed using CSS only. */
-body:not(.app-ready) .dayPanel:target{padding-top:calc(68px + env(safe-area-inset-top))}
-body:not(.app-ready) .dayPanel:target .navline{display:flex;position:fixed;top:0;left:0;right:0;z-index:60;height:calc(52px + env(safe-area-inset-top));padding:env(safe-area-inset-top) max(16px,calc((100vw - 688px)/2)) 0;background:rgba(242,242,247,.88);backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);border-bottom:.5px solid rgba(60,60,67,.16);align-items:center;justify-content:flex-start}
-body:not(.app-ready) .dayPanel:target .navline a{font-size:17px;font-weight:500;letter-spacing:-.2px;min-height:44px;display:flex;align-items:center;padding-right:12px}
-body:not(.app-ready) .dayPanel:target .navline span{position:absolute;left:50%;transform:translateX(-50%);width:min(58vw,360px);font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
-/* Keep navigation text out of translucent/backdrop compositing on iOS. */
-.day-toolbar,body:not(.app-ready) .dayPanel:target .navline{
- background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none;
- filter:none;isolation:isolate;
+.day-toolbar a,body:not(.app-ready):has(.dayPanel:target) .dayPanel .navline a{
+ display:flex;align-items:center;min-height:48px;color:var(--blue);
+ font-size:18px;line-height:24px;font-weight:600;text-decoration:none;letter-spacing:normal;
 }
-.day-toolbar span,body:not(.app-ready) .dayPanel:target .navline span{
- left:21%;right:21%;width:auto;transform:none;text-shadow:none;
+.day-toolbar span,body:not(.app-ready):has(.dayPanel:target) .dayPanel .navline span{
+ position:static;min-width:0;margin:0;width:auto;
+ font-size:15px;line-height:22px;font-weight:600;letter-spacing:normal;
+ color:inherit;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+ transform:none;filter:none;text-shadow:none;-webkit-font-smoothing:auto;
 }
-/* The fixed top control replaces the duplicate bottom return link. */
 .dayPanel .backHome,.dayPanel .day-flow-note{display:none!important}
+/* Without JavaScript, each day's header stays attached during continuous scrolling. */
+body:not(.app-ready):has(.dayPanel:target){overflow-x:clip}
+body:not(.app-ready):has(.dayPanel:target) .dayPanel{display:block;padding-top:0;overflow:visible}
+body:not(.app-ready):has(.dayPanel:target) #d15{padding-bottom:calc(100px + env(safe-area-inset-bottom))}
+body:not(.app-ready):has(.dayPanel:target) .dayPanel .navline{
+ position:sticky;top:0;left:auto;right:auto;margin:0 -16px;
+ padding:env(safe-area-inset-top,0px) 16px 0;
+}
 @media(prefers-color-scheme:dark){
- .day-toolbar,body:not(.app-ready) .dayPanel:target .navline{background:var(--bg);border-bottom-color:rgba(255,255,255,.12)}
+ .day-toolbar,body:not(.app-ready):has(.dayPanel:target) .dayPanel .navline{
+  background:#111114;color:#f5f5f7;border-bottom-color:#38383e;
+ }
 }
 #trips,#new-trip{display:none}#trips.active,#new-trip.active{display:block}
 body.hub-open .tabbar{display:none}
@@ -178,57 +189,6 @@ body:not(.app-ready):has(#info:target) .tabbar{display:flex!important}
 .dayPanel > .logistics .logistics-head{justify-content:flex-start;margin:0 4px 10px}
 .dayPanel > .logistics .logistics-head span{font-size:11px;color:var(--sub)}
 
-/* Solid navigation, without backdrop compositing or fractional text transforms. */
-.day-toolbar,body:not(.app-ready) .dayPanel:target .navline{
- background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none;
- filter:none;opacity:1;transform:none;isolation:isolate;
- gap:8px;border-bottom:1px solid var(--line);
-}
-.day-toolbar a,body:not(.app-ready) .dayPanel:target .navline a{
- flex:0 0 68px;padding-right:0;position:relative;z-index:1;
-}
-.day-toolbar span,body:not(.app-ready) .dayPanel:target .navline span{
- position:static;left:auto;right:auto;transform:none;width:auto;min-width:0;
- flex:1;text-align:center;margin-right:76px;text-shadow:none;
-}
-@media(max-width:360px){
- .day-toolbar span,body:not(.app-ready) .dayPanel:target .navline span{margin-right:0;text-align:left;}
-}
-
-/* Continuous days in iPhone file previews, including when scripts are disabled.
-   Each day's opaque sticky header replaces the preceding one during scrolling. */
-body:not(.app-ready):has(.dayPanel:target){overflow-x:clip}
-body:not(.app-ready):has(.dayPanel:target) .dayPanel{
- display:block;padding-top:0;overflow:visible;
-}
-body:not(.app-ready):has(.dayPanel:target) #d15{
- padding-bottom:calc(100px + env(safe-area-inset-bottom));
-}
-body:not(.app-ready):has(.dayPanel:target) .dayPanel .navline{
- display:flex;position:sticky;top:0;left:auto;right:auto;z-index:60;
- height:calc(52px + env(safe-area-inset-top));
- margin:0 -16px;padding:env(safe-area-inset-top) 16px 0;
- align-items:center;justify-content:flex-start;gap:8px;
- background:var(--bg);border-bottom:1px solid var(--line);
- backdrop-filter:none;-webkit-backdrop-filter:none;
- filter:none;opacity:1;transform:none;isolation:isolate;
-}
-body:not(.app-ready):has(.dayPanel:target) .dayPanel .navline a{
- flex:0 0 68px;padding-right:0;position:relative;z-index:1;
- font-size:17px;font-weight:500;letter-spacing:-.2px;
- min-height:44px;display:flex;align-items:center;
-}
-body:not(.app-ready):has(.dayPanel:target) .dayPanel .navline span{
- position:static;left:auto;right:auto;transform:none;width:auto;min-width:0;
- flex:1;text-align:center;margin-right:76px;text-shadow:none;
- font-size:14px;font-weight:600;color:var(--text);
- white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-@media(max-width:360px){
- body:not(.app-ready):has(.dayPanel:target) .dayPanel .navline span{
-  margin-right:0;text-align:left;
- }
-}
 </style><style id="point-navigation-style">
 .point-navigation{margin:10px 0 18px;border:1px solid rgba(128,128,128,.22);border-radius:18px;overflow:hidden;background:transparent}
 .point-nav-help{margin:0;padding:14px 16px;font-size:13px;line-height:1.5;opacity:.72}
@@ -252,10 +212,7 @@ body:not(.app-ready):has(.dayPanel:target) .dayPanel .navline span{
 body:has(.photo-expand[open]){overflow:hidden}
 @media(min-width:600px){.dayPanel .photo-trigger img{height:280px}}
 @media(max-width:360px){.v3stop>.photo-expand{margin-left:0}}
-</style><link href="./manifest.webmanifest" rel="manifest"/><meta content="#f2f2f7" name="theme-color"/><style>/* Final, opaque navigation layer: no blur or fractional transforms. */
-body .day-toolbar,body .dayPanel .navline{background:var(--bg)!important;background-image:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;filter:none!important;transform:none!important;opacity:1!important;text-shadow:none!important;box-shadow:none!important}
-body .day-toolbar{z-index:500;isolation:isolate}
-body .day-toolbar span,body .dayPanel .navline span{transform:none!important;filter:none!important;text-shadow:none!important;-webkit-font-smoothing:auto;font-size:14px;font-weight:650}
+</style><link href="./manifest.webmanifest" rel="manifest"/><meta content="#f2f2f7" name="theme-color"/><style>
 .dayHead{margin-bottom:10px}.day-description{margin:0 0 20px!important;padding:0!important;border:0!important;background:none!important;color:var(--sub);font-size:16px;line-height:1.6;max-width:65ch}
 .day-brief,.today-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin:16px 0 24px}.brief-title{font-weight:700;font-size:18px}.day-brief p,.food-card p,.today-card p{font-size:14px;line-height:1.55;margin:9px 0}.priority{border-left:3px solid var(--blue);padding-left:12px;margin:16px 0}.day-brief summary{cursor:pointer;color:var(--blue);font-size:14px;min-height:44px;display:flex;align-items:center}.muted{color:var(--sub);font-size:12px!important;line-height:1.5}.today-card h2{font-size:23px;margin:8px 0}.text-action{display:block;margin-top:15px;font-size:14px}.food-cards{display:grid;gap:12px}.food-card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:16px}.food-heading{display:flex;justify-content:space-between;gap:12px;align-items:baseline}.food-heading span,.food-card small{font-size:12px;color:var(--sub)}.food-heading b{font-size:16px}.food-actions{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:12px}.food-actions a{font-size:14px;min-height:36px;display:flex;align-items:center}.food-note{margin:0 5px 10px}.group .primary+.primary{margin-top:10px}.check-row{padding:13px 0;border-bottom:1px solid var(--line)}.check-row label{display:flex;gap:12px;align-items:flex-start}.check-row small{display:block;font-size:13px;color:var(--sub);margin-top:4px;line-height:1.45}.check-row a{display:inline-block;margin:10px 0 0 35px;font-size:14px}.check-row input,.stop-check input{accent-color:var(--blue);width:21px;height:21px;flex-shrink:0}.stop-check{display:flex;align-items:center;gap:5px;color:var(--sub);font-size:12px;margin-top:9px}.point-nav-row:has(input:checked) b{text-decoration:line-through;color:var(--sub)}.infoCard button,.import-label{font:inherit;font-size:14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--blue);padding:12px;display:inline-block;margin:6px 6px 6px 0;cursor:pointer}.import-label input{display:block;max-width:230px;font-size:12px;margin-top:6px}[hidden]{display:none!important}#save-status{font-size:13px;color:var(--sub)}.places-photos-list{border-radius:18px}.photo-trigger{border-radius:14px;overflow:hidden}.photo-trigger img{border-radius:14px;object-fit:cover}a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-offset:3px}body .day-toolbar a{min-width:68px}body .day-toolbar span{margin-right:0;text-align:left;line-height:1.3}
 </style></head><body><section class="shell" id="trips">
