@@ -271,7 +271,7 @@ body.app-ready.days-open .dayPanel{scroll-margin-top:0}
 /* Keep interactive content below the iOS standalone top overlay.
    Browser and local-file layouts retain their original dimensions. */
 @media(orientation:portrait){
- html.ios-standalone body.app-ready{padding-top:44px}
+ html.ios-standalone body.app-ready{padding-top:16px}
 }
 </style>
 </head><body><script>(()=>{
@@ -683,10 +683,10 @@ if('serviceWorker' in navigator&&location.protocol==='https:'){
 }else{say('Plik zawiera plan i zdjęcia. Automatyczny offline i aktualizacje działają w wersji internetowej.');update.disabled=true;}
 })();
 </script>
-<script id="header-diagnostics-v15">
+<script id="header-diagnostics-v16">
 (()=>{
  const panel=document.createElement('section');panel.className='infoCard';
- panel.innerHTML='<h3>Diagnostyka belki · wersja 15</h3><p>Otwórz dowolny dzień, a następnie wróć tutaj przez dolny przycisk Info. Ten odczyt pozostaje na urządzeniu.</p><pre id="header-diagnostic-values" style="white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.6 ui-monospace,monospace;color:var(--text);margin:14px 0 0"></pre>';
+ panel.innerHTML='<h3>Diagnostyka belki · wersja 16</h3><p>Otwórz dowolny dzień, a następnie wróć tutaj przez dolny przycisk Info. Ten odczyt pozostaje na urządzeniu.</p><pre id="header-diagnostic-values" style="white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.6 ui-monospace,monospace;color:var(--text);margin:14px 0 0"></pre>';
  document.querySelector('#info .hero').after(panel);
  const out=panel.querySelector('pre'),bar=document.querySelector('.day-toolbar');
  let lastDay='Brak pomiaru — najpierw otwórz dzień.';
@@ -696,7 +696,7 @@ if('serviceWorker' in navigator&&location.protocol==='https:'){
    const a=bar.querySelector('a'),ar=a.getBoundingClientRect();
    lastDay='Góra belki: '+Math.round(r.top)+' px\nWysokość belki: '+Math.round(r.height)+' px\nGóra przycisku Plan: '+Math.round(ar.top)+' px\nWarstwa nad przyciskiem: '+(document.elementFromPoint(ar.x+ar.width/2,ar.y+ar.height/2)===a?'brak':'inna');
   }
-  out.textContent='Wersja kodu: 15\nTryb standalone: '+(navigator.standalone===true?'tak':'nie')+'\nTryb CSS standalone: '+(matchMedia('(display-mode: standalone)').matches?'tak':'nie')+'\nKlasa poprawki iOS: '+(document.documentElement.classList.contains('ios-standalone')?'tak':'nie')+'\nOdstęp nad aplikacją: '+getComputedStyle(document.body).paddingTop+'\nWidok: '+innerWidth+' × '+innerHeight+'\nAdres: '+location.pathname+location.search+'\n\nOstatni pomiar dnia:\n'+lastDay;
+  out.textContent='Wersja kodu: 16\nTryb standalone: '+(navigator.standalone===true?'tak':'nie')+'\nTryb CSS standalone: '+(matchMedia('(display-mode: standalone)').matches?'tak':'nie')+'\nKlasa poprawki iOS: '+(document.documentElement.classList.contains('ios-standalone')?'tak':'nie')+'\nOdstęp nad aplikacją: '+getComputedStyle(document.body).paddingTop+'\nWidok: '+innerWidth+' × '+innerHeight+'\nAdres: '+location.pathname+location.search+'\n\nOstatni pomiar dnia:\n'+lastDay;
  }
  document.addEventListener('click',measure,true);
  window.addEventListener('hashchange',()=>requestAnimationFrame(measure));
