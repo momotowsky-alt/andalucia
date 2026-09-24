@@ -1,0 +1,18 @@
+{
+  "name": "Andalucía · podróże",
+  "short_name": "Andalucía",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f2f2f7",
+  "theme_color": "#f2f2f7",
+  "lang": "pl",
+  "icons": [
+    {
+      "src": "./apple-touch-icon.PNG",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
